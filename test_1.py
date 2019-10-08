@@ -4,7 +4,54 @@
 # A發送加密後的訊息x給B,B使用A發送的對應表找到自己訊息的對應密鑰y,使用密文真值表得到唯壹結果z,將z返回給A
 # 以下實現僅壹個門電路的傳輸過程
 
-def gate_example(x,y):
+import random
+
+input_A = input("A 's plaint message:(eg: 100)")
+input_B = input("B 's palint message:(eg: 011)")
+
+list_A = list(input_A)
+list_B = list(input_B)
+
+dict_A = {}
+dict_B = {}
+
+def random_you(input_list,input_dict):
+	dir = 0
+	for x in input_list:
+		y = random.randint(0,1999)
+		input_dict[dir] = y
+		dir = dir+1
+	return input_dict
+
+dict_A = random_you(list_A,dict_A)
+dict_B = random_you(list_B,dict_B)
+
+circle_1_and = 
+	
+
+def gate_and(x,y):
+	if(x=='a0' and y=='b0'):
+		z='c0'
+	if(x=='a1' and y=='b0'):
+		z='c0'
+	if(x=='a0' and y=='b1'):
+		z='c0'
+	if(x=='a1' and y=='b1'):
+		z='c1'
+	return z
+
+def gate_or(x,y):
+	if(x=='0' and y=='b0'):
+		z='c0'
+	if(x=='a1' and y=='b0'):
+		z='c0'
+	if(x=='a0' and y=='b1'):
+		z='c0'
+	if(x=='a1' and y=='b1'):
+		z='c1'
+	return z
+
+def gate_not(x):
 	if(x=='a0' and y=='b0'):
 		z='c0'
 	if(x=='a1' and y=='b0'):
@@ -45,7 +92,9 @@ for x in tran_C:
 print("A get the result from B is:"+z)
 
 
-
+# 太困难了，我做不出来
+# PS： 晚上千万别喝奶茶，喝完700cc包你睡意全无
+# 233333333333333333333333333333333333333333333333
 
 
 

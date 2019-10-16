@@ -1,6 +1,6 @@
 # coding=gbk		
 
-# Part1-以下代码为电路拼接函数main()，最终返还一个真值表，贮存在dictionary里面：
+# Part1-以下代码为电路拼接函式main()，最终返还一个真值表，贮存在dictionary里面：
 
 def AND(input_x,input_y):
 	return input_x*input_y
@@ -145,3 +145,19 @@ def main():
 			print(y+":"+str(x[y]))
 		
 main()
+
+# Part-2 以下代码为随机数加密真值表函式encry(),进入dictionary，返回一个加密后的真值表：
+
+def encry(dictionary):
+	
+
+
+
+
+
+
+
+
+
+
+

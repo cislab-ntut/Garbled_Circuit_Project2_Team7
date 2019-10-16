@@ -146,10 +146,19 @@ def main():
 		
 main()
 
-# Part-2 以下代码为随机数加密真值表函式encry(),进入dictionary，返回一个加密后的真值表：
+# Part-2 以下代码为随机数加密真值表函式encry(),进入dictionary，返回一个加密后的真值表zip：
 
 def encry(dictionary):
 	
+# Part-3 以下代码为混淆真值表顺序函式mess(),进入zip,返回final:
+
+def mess(zip):
+	
+# Part-4 分离出2个输入方的密钥表，得到finalA,finalB：
+
+# Part-5 传输过程与返回过程的代码函式run()：
+
+def run():
 
 
 

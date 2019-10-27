@@ -54,31 +54,37 @@ def input_circuit():
 def random_string():
     global GARBLED_WIRE, WIRE
     for c in WIRE:
-        GARBLED_WIRE[c] = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        w = []
+        w.append(random.choices(string.ascii_uppercase + string.digits, k=5))
+        w.append(random.choices(string.ascii_uppercase + string.digits, k=5))
+        GARBLED_WIRE[c] = w
 
+#quickly return md5 hash value
 def md5(data):
     m = hashlib.md5()
     m.update(data.encode('utf-8'))
     return m.hexdigest()
 
+#garbled all truth table
 def garbled_gate(gate):
     gatetable = []
     for x in [0, 1]:
         for y in [0, 1]:
-            md5hash = md5(''.join(GARBLED_WIRE[gate[1]] + str(x) + GARBLED_WIRE[gate[2]] + str(y)))
+            md5hash = md5(''.join(GARBLED_WIRE[gate[1]][x] + GARBLED_WIRE[gate[2]][y]))
             if gate[0] == "AND":
-                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]] + str(x and y)])
+                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]][int(x and y)]])
             elif gate[0]  == "NAND":
-                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]] + str(int(not(x and y)))])
+                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]][int(not(x and y))]])
             elif gate[0]  == "OR":
-                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]] + str(x or y)])
+                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]][int(x or y)]])
             elif gate[0]  == "NOR":
-                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]] + str(int(not(x or y)))])
+                gatetable.append([md5hash ,GARBLED_WIRE[gate[3]][int(not(x or y))]])
             else:
                 print(gate[0], "not found")
     random.shuffle(gatetable)
     return gatetable
 
+#generate garble circuit with random string and garbled truth table
 def generate_garbled_circuit():
     global GARBLED_TRUTH_TABLE
     random_string()
@@ -86,7 +92,24 @@ def generate_garbled_circuit():
         table = garbled_gate(gate[1])
         GARBLED_TRUTH_TABLE[gate[0]] = table
 
-#def decryption():
+#find hash value in the truth table
+def find_table(md5hash, gate):
+    for i in GARBLED_TRUTH_TABLE[gate]:
+        if md5hash == i[0]:
+            return i
+
+#test the function of the garbled circuit
+def decrypt_garbled_circuit():
+    wire = dict()
+    for key, i in enumerate(PLAINTEXT):
+        wire[INPUT[key]] = GARBLED_WIRE[INPUT[key]][int(i)]
+    for gate in CIRCUIT.items():
+        md5hash = md5(''.join(wire[gate[1][1]] + wire[gate[1][2]]))
+        answer = find_table(md5hash, gate[0])
+        wire[gate[1][3]] = answer[1]
+    return GARBLED_WIRE[WIRE[-1]].index(wire[WIRE[-1]])
+
+
 
 def main():
     print("-Garbled Circuit-")
@@ -96,6 +119,9 @@ def main():
     generate_garbled_circuit()
     print(GARBLED_WIRE)
     print(GARBLED_TRUTH_TABLE)
+
+    print(decrypt_garbled_circuit())
+
 
 #main function execution
 if __name__ == "__main__":

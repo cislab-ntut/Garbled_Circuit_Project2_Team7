@@ -8,15 +8,11 @@ import string
 
 PLAINTEXT = ""
 
-INPUT = []
-#GARBLED_INPUT = dict()
-WIRE = []
-GARBLED_WIRE = dict()
-CIRCUIT = dict()
-#TRUTH_TABLE = dict()
-GARBLED_TRUTH_TABLE = dict()
-
-#def initial():
+INPUT = []  #name of input line
+WIRE = []  #name of line
+GARBLED_WIRE = dict()  #garbled name of line
+CIRCUIT = dict()  #circuit description like verilog
+GARBLED_TRUTH_TABLE = dict()  #garbled truth table
 
 #input binary string
 def input_plaintext():
@@ -25,6 +21,7 @@ def input_plaintext():
     INPUT = [c for c in string.ascii_uppercase[:len(PLAINTEXT)]]
     print(INPUT)
 
+#save wire name
 def save_wire(gate):
     global WIRE
     for w in gate[2:]:
@@ -109,19 +106,16 @@ def decrypt_garbled_circuit():
         wire[gate[1][3]] = answer[1]
     return GARBLED_WIRE[WIRE[-1]].index(wire[WIRE[-1]])
 
-
-
 def main():
     print("-Garbled Circuit-")
-    #initial()
     input_plaintext()
     input_circuit()
     generate_garbled_circuit()
+    print("Garbled wire:")
     print(GARBLED_WIRE)
+    print("Garbled truth table:")
     print(GARBLED_TRUTH_TABLE)
-
-    print(decrypt_garbled_circuit())
-
+    print("Answer of decryption:", decrypt_garbled_circuit())
 
 #main function execution
 if __name__ == "__main__":

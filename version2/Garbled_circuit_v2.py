@@ -9,8 +9,9 @@ import string
 PLAINTEXT = ""
 
 INPUT = []  #name of input line
-OUTPUT = [] #name of output line
+OUTPUT = []  #name of output line
 WIRE = []  #name of line
+
 GARBLED_WIRE = dict()  #garbled name of line
 CIRCUIT = dict()  #circuit description like verilog
 GARBLED_TRUTH_TABLE = dict()  #garbled truth table

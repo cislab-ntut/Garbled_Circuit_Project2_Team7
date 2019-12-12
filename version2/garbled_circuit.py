@@ -1,5 +1,5 @@
 # Garbled Circuit
-# python 3.6
+# python 3.7.4
 # encoding=utf-8
 
 import os.path
@@ -8,17 +8,17 @@ import hashlib
 import string
 
 class GC:
-    message = ""
-    _input_wire = [] # name of input line
-    _output_wire = [] # name of output line
-    _wire = dict() # name of line
-    garbled_wire = dict() # garbled name of line
-    _circuit = [] # circuit description like verilog
-    garbled_truth_table = [] # garbled truth table
-    ans = dict()
-
     # initial
     def __init__(self, plaintext, input_wire, output_wire, circuit):
+        self.message = ""
+        self._input_wire = [] # name of input line
+        self._output_wire = [] # name of output line
+        self._wire = dict() # name of line
+        self.garbled_wire = dict() # garbled name of line
+        self._circuit = [] # circuit description like verilog
+        self.garbled_truth_table = [] # garbled truth table
+        self.ans = dict()
+
         self.input_message(plaintext, input_wire, output_wire)
         self.input_circuit(circuit)
 
@@ -34,21 +34,22 @@ class GC:
         self._output_wire = output_wire
 
         if len(self.message) != len(self._input_wire):
-            print("Input format error!")
+            print("Input format error!", self.message, self._input_wire)
             exit(0)
 
         for c in self._input_wire:
             self._wire[c] = self.keygen()
         for c in self._output_wire:
             self._wire[c] = self.keygen()
-        print(self._wire)
+        # print(self._wire)
 
     # circuit description
     def input_circuit(self, circuit):
+        self._circuit = []
         for gate in circuit:
             gate_ = gate.split()
             if len(gate_) != 4:
-                print("Gate format error!")
+                print("Gate format error!", gate_)
                 exit(0)
             self.save_wire(gate_)
             circuit_ = [self._wire[w] for w in gate_[1:]]
@@ -88,6 +89,7 @@ class GC:
 
     # random letters and digits generation
     def garble_wire(self):
+        self.garbled_wire = dict()
         for c in self._wire.values():
             w = []
             w.append(self.keygen())
@@ -136,6 +138,7 @@ class GC:
 
 def main():
     print("-Garbled Circuit-")
+    input_wire = []
     output_wire = []
     circuit = []
 

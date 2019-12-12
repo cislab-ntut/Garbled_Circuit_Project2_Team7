@@ -34,10 +34,11 @@ class sha256:
     
     # pre-processing
     def pre_process(self):
+        length = len(self.message)
         self.message += '1'
         while len(self.message) % 448 != 0:
             self.message += '0'
-        self.message += '{0:064b}'.format(len(self.message))
+        self.message += '{0:064b}'.format(length)
         # print(len(self.message))
 
     # process the message in successive 512-bit chunks
@@ -45,7 +46,7 @@ class sha256:
         chunks = [self.message[i:i + 512] for i in range(0, len(self.message), 512)]
         for chunk in chunks:
             w = self.extend(chunk)
-            al = self._h
+            al = self._h.copy()
             self.main_loop(w, al)
             for i in range(0, 8):
                 self._h[i] = format(int(self._h[i], 2) + int(al[i], 2), "032b")

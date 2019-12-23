@@ -36,7 +36,7 @@ class sha256:
     def pre_process(self):
         length = len(self.message)
         self.message += '1'
-        while len(self.message) % 448 != 0:
+        while len(self.message) % 512 != 448:
             self.message += '0'
         self.message += '{0:064b}'.format(length)
         # print(len(self.message))

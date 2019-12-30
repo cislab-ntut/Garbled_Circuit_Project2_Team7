@@ -7,7 +7,7 @@ import queue
 import string
 import garbled_circuit
 
-import datetime
+import random
 
 class sha256:
     # initial
@@ -21,7 +21,7 @@ class sha256:
         self.message = []
 
         self.text_to_bits(plaintext)
-        os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
+        os.chdir("C:\\Users\\DELL\\Desktop\\version2")
         print(os.path.abspath('.'))
         # load constant data block
         if os.path.isfile("sha256_h") and os.path.isfile("sha256_k"):
@@ -207,65 +207,11 @@ class sha256:
         bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
         self.message = bits.zfill(8 * ((len(bits) + 7) // 8))
 
-# def main():
-#     plaintext = input("")
-#     sha256_ = sha256(plaintext)
-#     print(sha256_.hexdigest())
-
-# NEW - 0
 def main():
-	flag = 1
-	while(flag):
-		arr = ["Heil Hitler!","American goverment","North Korea","Iran","bomb attark"]
-		print("choose type:\nfixed length string : 1\nfreedom input : 2\ntest all : 3")
-		type_ = input("")
-		type_ = int(type_)
-		if(type_==1):
-			print("choose string : \n")
-			i = 0
-			for x in arr:
-				print(str(i)+"    "+x)
-				i = i+1
-			num = input("")
-			num = int(num)
-			plaintext = arr[num]
-			function(plaintext)
-			flag = conti()
-		elif(type_==2):
-			plaintext = input("Please enter text:\n")
-			function(plaintext)
-			flag = conti()
-		elif(type_==3):
-			i = 0
-			for x in arr:
-				print("      ")
-				print(str(i)+"   "+x)
-				i = i+1
-				function(x)
-				print("      ")
-			flag = conti()
-		else:
-			return 0
-    
-# NEW - 1
-def function(plaintext):
-	start_time = datetime.datetime.now()
-	sha256_ = sha256(plaintext)
-	end_time = datetime.datetime.now()
-	interval = (end_time-start_time).total_seconds()
-	print(sha256_.hexdigest())
-	print("Time:"+str(interval)+" s")
-    
-# NEW - 2
-def conti():
-	print("")
-	r = input("continue?(y/n)")
-	if(r == "y"):
-		flag = 1
-	else:
-		flag = 0
-	print("")
-	return flag
+    plaintext = ''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=32))
+    print("RANDOM STRING: "+plaintext)
+    sha256_ = sha256(plaintext)
+    print(sha256_.hexdigest())
 
 # main function execution
 if __name__ == "__main__":

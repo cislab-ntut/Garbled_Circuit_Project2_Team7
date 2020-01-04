@@ -6,8 +6,7 @@ import os.path
 import random
 import hashlib
 import string
-
-import datetime
+import time
 
 class GC:
     # initial
@@ -20,17 +19,18 @@ class GC:
         self._circuit = [] # circuit description like verilog
         self.garbled_truth_table = [] # garbled truth table
         self.ans = dict()
-        self.gen_time = 0
-        self.dec_time = 0
 
+        self.genTime = time.time()
         self.input_message(plaintext, input_wire, output_wire)
         self.input_circuit(circuit)
+        self.generate_garbled_circuit()
+        self.genTime = time.time() - self.genTime
 
     # execute
     def update(self):
-        self.generate_garbled_circuit()
+        self.decTime = time.time()
         self.decrypt_garbled_circuit()
-
+        self.decTime = time.time() - self.decTime
     # input message and wire
     def input_message(self, plaintext, input_wire, output_wire):
         self.message = plaintext
@@ -85,15 +85,11 @@ class GC:
 
     # generate garble circuit with random string and garbled truth table
     def generate_garbled_circuit(self):
-        start_time = datetime.datetime.now()
         self.garble_wire()
         for key, gate in enumerate(self._circuit):
             table = self.garble_gate(gate)
             self.garbled_truth_table.append(table)
             self._circuit[key].pop(0)
-        end_time = datetime.datetime.now()
-        self.gen_time = (end_time-start_time).total_seconds()
-        print("GENERATE TIME ： "+str(self.gen_time)+" s")
 
     # random letters and digits generation
     def garble_wire(self):
@@ -130,7 +126,6 @@ class GC:
 
     # execute garbled circuit
     def decrypt_garbled_circuit(self):
-        start_time = datetime.datetime.now()
         wire = dict()
         for key, i in enumerate(self.message):
             wire[self._wire[self._input_wire[key]]] = self.garbled_wire[self._wire[self._input_wire[key]]][int(i)]
@@ -144,9 +139,6 @@ class GC:
                     break
         for w in self._output_wire:
             self.ans[w] = self.garbled_wire[self._wire[w]].index(wire[self._wire[w]])
-        end_time = datetime.datetime.now()
-        self.dec_time = (end_time-start_time).total_seconds()
-        print("DECRYPT TIME ： "+str(self.dec_time)+" s")
 
 def main():
     print("-Garbled Circuit-")

@@ -3,11 +3,11 @@
 # encoding=utf-8
 
 import os
+import sys
 import queue
 import string
-import garbled_circuit
-
 import random
+import garbled_circuit
 
 class sha256:
     # initial
@@ -19,6 +19,8 @@ class sha256:
         self._input_wire = dict()
         self._output_wire = dict()
         self.message = []
+        self.genTime = 0
+        self.decTime = 0
 
         self.text_to_bits(plaintext)
         os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
@@ -33,6 +35,8 @@ class sha256:
         else:
             print("sha256_h & sha256_k not found")
             exit(0)
+        print("Generate garbled circuit: ", self.genTime)
+        print("Drcrypt garbled circuit: ", self.decTime)
     
     # pre-processing
     def pre_process(self):
@@ -104,6 +108,8 @@ class sha256:
         gc_ = garbled_circuit.GC(x, self._input_wire['s00'], self._output_wire['s00'], self._circuit['s00'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -114,6 +120,8 @@ class sha256:
         gc_ = garbled_circuit.GC(x, self._input_wire['s01'], self._output_wire['s01'], self._circuit['s01'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -124,6 +132,8 @@ class sha256:
         gc_ = garbled_circuit.GC(x, self._input_wire['s10'], self._output_wire['s10'], self._circuit['s10'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -134,6 +144,8 @@ class sha256:
         gc_ = garbled_circuit.GC(x, self._input_wire['s11'], self._output_wire['s11'], self._circuit['s11'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -144,6 +156,8 @@ class sha256:
         gc_ = garbled_circuit.GC(a + b + c, self._input_wire['ma'], self._output_wire['ma'], self._circuit['ma'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -154,6 +168,8 @@ class sha256:
         gc_ = garbled_circuit.GC(a + b + c, self._input_wire['ch'], self._output_wire['ch'], self._circuit['ch'])
         gc_.update()
         ans = gc_.ans
+        self.genTime += gc_.genTime
+        self.decTime += gc_.decTime
         s = ""
         for i in range(0, 32):
             s += str(ans['o_' + str(i)])
@@ -208,10 +224,15 @@ class sha256:
         self.message = bits.zfill(8 * ((len(bits) + 7) // 8))
 
 def main():
-    plaintext = ''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=32))
-    print("RANDOM STRING: "+plaintext)
-    sha256_ = sha256(plaintext)
-    print(sha256_.hexdigest())
+    if len(sys.argv) == 1:
+        plaintext = ''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=32))
+        print("RANDOM STRING: " + plaintext)
+        sha256_ = sha256(plaintext)
+        print(sha256_.hexdigest())
+    else:
+        plaintext = sys.argv[1]
+        sha256_ = sha256(plaintext)
+        print(sha256_.hexdigest())
 
 # main function execution
 if __name__ == "__main__":

@@ -17,7 +17,7 @@ The next ***n*** lines are the two-input logic gates description, each line cont
 
 #### Input Format
 The input only have one line string ***s*** with 0 or 1.  
-It would read the circuit description file from `.\circuit\gc`
+It would read the circuit description file from `./circuit/gc`
 
 #### Output Format
 Output ***lo*** lines, which indicates the number of circuit output wire and each line has a name tag and a number either 0 or 1.
@@ -54,7 +54,7 @@ o5 0
 > As same as the basic function, I also wrote it in the "class", and easily call the `garbled_circuit` function to calculate.
 
 #### Usage
-> Using `python sha256_gc.py` to generate the input randomly or `python sha256_gc.py <arg1>` to indicate the string to hash.
+> Using `python3 sha256_gc.py` to generate the input randomly or `python3 sha256_gc.py <arg1>` to indicate the string to hash.
 
 #### Example
 

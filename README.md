@@ -9,7 +9,7 @@
 ## Version 2 (Main)
 > Implement that all circuits have to read from "circuit" directory. By the way, only support the combinational circuit and must be with hierarchy.
 
-### Circuit Description Format
+#### Circuit Description Format
 The first line contains all of the circuit input name tag, separate with space.  
 The second line contains all of the circuit output name tag, separate with space.  
 

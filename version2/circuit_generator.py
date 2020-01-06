@@ -196,6 +196,6 @@ def main():
 
 # main function execution
 if __name__ == "__main__":
-    os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
-    print(os.path.abspath('.'))
+    # os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
+    # print(os.path.abspath('.'))
     main()

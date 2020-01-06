@@ -31,6 +31,7 @@ class GC:
         self.decTime = time.time()
         self.decrypt_garbled_circuit()
         self.decTime = time.time() - self.decTime
+
     # input message and wire
     def input_message(self, plaintext, input_wire, output_wire):
         self.message = plaintext
@@ -145,9 +146,9 @@ def main():
     input_wire = []
     output_wire = []
     circuit = []
-
-    if os.path.isfile("gc.txt"):
-        f = open("gc.txt", "r")
+    # os.chdir("D:/Development/Project7-2_Garbled_circuit/version2")
+    if os.path.isfile("circuit/gc"):
+        f = open("circuit/gc", "r")
         if f.mode == "r":
             lines = f.readlines()
             input_wire = lines.pop(0).split()
@@ -160,15 +161,19 @@ def main():
         exit(0)
 
     plaintext = input("Input message:")
-    gc_ = GC(plaintext, input_wire, output_wire, circuit)
-    gc_.update()
-    print("Garbled wire:")
-    print(gc_.garbled_wire)
-    print("Garbled truth table:")
-    print(gc_.garbled_truth_table)
-    print("Answer of decryption:")
-    for key, i in gc_.ans.items():
-        print(key, i)
+    if len(input_wire) == len(plaintext):
+        gc_ = GC(plaintext, input_wire, output_wire, circuit)
+        gc_.update()
+        print("Garbled wire:")
+        print(gc_.garbled_wire)
+        print("Garbled truth table:")
+        print(gc_.garbled_truth_table)
+        print("Answer of decryption:")
+        for key, i in gc_.ans.items():
+            print(key, i)
+    else:
+        print("Input string length error!")
+        exit(0)
 
 # main function execution
 if __name__ == "__main__":

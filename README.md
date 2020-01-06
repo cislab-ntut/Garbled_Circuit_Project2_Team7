@@ -51,7 +51,7 @@ o5 0
 ```
 
 ### SHA256 with Garbled Circuit
-> As same as the basic function, I also wrote it in the "class", and easily call the `garbled_circuit` function to calculate.
+> As same as the basic function, I also wrote it in another "class", and easily call the `garbled_circuit` function to calculate.
 
 #### Usage
 > Using `python3 sha256_gc.py` to generate the input randomly or `python3 sha256_gc.py <arg1>` to indicate the string to hash.

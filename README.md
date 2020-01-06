@@ -57,6 +57,21 @@ o5 0
 > Using `python3 sha256_gc.py` to generate the input randomly or `python3 sha256_gc.py <arg1>` to indicate the string to hash.
 
 #### Example
+```
+> python3 sha256_gc.py
+
+RANDOM STRING: A5V6S8M8qoIgte16PPls1Qq7LAtinDSO
+Generate garbled circuit:  1.0856802463531494
+Drcrypt garbled circuit:  0.11695456504821777
+0x2b0fea56f3f4bd0305c0e9c1f69f9b1815563e9699f43ad73c2deab62d213412
+```
+```
+> python3 sha256_gc.py AAAAAAAAA
+
+Generate garbled circuit:  1.080643653869629
+Drcrypt garbled circuit:  0.10996103286743164
+0xe5f9176ecd90317cf2d4673926c9db65475b0b58e7f468586ddaef280a98cdbd
+```
 
 ## Contribution
 [click me](https://hackmd.io/@edDnIx-xTO2Y79IC9tqYgg/B1wep6z9r)

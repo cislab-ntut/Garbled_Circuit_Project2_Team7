@@ -23,8 +23,8 @@ class sha256:
         self.decTime = 0
 
         self.text_to_bits(plaintext)
-        os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
-        print(os.path.abspath('.'))
+        # os.chdir("D:\\Development\\Project7-2_Garbled_circuit\\version2")
+        # print(os.path.abspath('.'))
         # load constant data block
         if os.path.isfile("sha256_h") and os.path.isfile("sha256_k"):
             self.read_h()
@@ -207,8 +207,8 @@ class sha256:
     def read_circuit(self):
         for pathname in self._pathtext:
             circuit = []
-            if os.path.isfile("circuit\\" + pathname):
-                f = open("circuit\\" + pathname, "r")
+            if os.path.isfile("circuit/" + pathname):
+                f = open("circuit/" + pathname, "r")
                 if f.mode == "r":
                     lines = f.readlines()
                     self._input_wire[pathname] = lines.pop(0).split()

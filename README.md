@@ -17,7 +17,7 @@ The next ***n*** lines are the two-input logic gates description, each line cont
 
 #### Input Format
 The input only have one line string ***s*** with 0 or 1.  
-It would read the circuit description file from `./circuit/gc`
+It would read the circuit description file from `.\circuit\gc`
 
 #### Output Format
 Output ***lo*** lines, which indicates the number of circuit output wire and each line has a name tag and a number either 0 or 1.

@@ -3,7 +3,7 @@
 > Garbled Circuit with two version. Version 1 is unfinished but only has a basic concept with garbled circuit.
 > Version 2 has been finished the most important encryption function.
 
-## Version 1
+## Version 1 (Archived)
 > Realize the manual input custom gate circuit, and then synthesize any custom combination circuit, and get the truth table function, but there is a requirement that each layer of the combination circuit need to have at least one gate.
 
 ## Version 2 (Main)

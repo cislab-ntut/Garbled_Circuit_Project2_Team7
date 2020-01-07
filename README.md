@@ -1,19 +1,26 @@
 # **Garbled Circuit**
 
 > Garbled Circuit with two version. Version 1 is unfinished but only has a basic concept with garbled circuit.
-> Version 2 has been finished the most important encryption function.
+> Version 2 has been finished the most important encryption function and sha256.
 
 ## Version 1 (Archived)
 > Realize the manual input custom gate circuit, and then synthesize any custom combination circuit, and get the truth table function, but there is a requirement that each layer of the combination circuit need to have at least one gate.
 
 ## Version 2 (Main)
 ### Basic Function
-> Implement that all circuits have to read from "circuit" directory. By the way, only support the combinational circuit and must be with hierarchy. All of the basic functions have defined in the "class" definition, so the user could use it easier.
+> Implement that all circuits have to read from "circuit" directory. By the way, only support the combinational circuit and must be with hierarchy. All of the basic functions have defined in the "class" definition, so the user could use it easier. Friendly reminder that this project has to be used with python v3.6.
+
+#### Execute
+```
+> python garbled_circuit.py
+```
 
 #### Circuit Description Format
-The first line contains all of the circuit input name tag, separate with space.  
-The second line contains all of the circuit output name tag, separate with space.  
-The next ***n*** lines are the two-input logic gates description, each line contains the logic type, first input name, second input name, and output name.
+```
+> The first line contains all of the circuit input name tag, separate with space.  
+> The second line contains all of the circuit output name tag, separate with space.  
+> The next ***n*** lines are the two-input logic gates description, each line contains the logic type, first input name, second input name, and output name.
+```
 
 #### Input Format
 The input only have one line string ***s*** with 0 or 1.  
@@ -53,12 +60,13 @@ o5 0
 ### SHA256 with Garbled Circuit
 > As same as the basic function, I also wrote it in another "class", and easily call the `garbled_circuit` function to calculate.
 
-#### Usage
-> Using `python3 sha256_gc.py` to generate the input randomly or `python3 sha256_gc.py <arg1>` to indicate the string to hash.
+#### Execute
+> Using `python sha256_gc.py` to generate the input randomly or `python sha256_gc.py <arg1>` to indicate the string to hash.  
+Using `python sha256_gc_noInput.py` to only calculate the generate time.
 
 #### Example
 ```
-> python3 sha256_gc.py
+> python sha256_gc.py
 
 RANDOM STRING: A5V6S8M8qoIgte16PPls1Qq7LAtinDSO
 Generate garbled circuit:  1.0856802463531494
@@ -66,11 +74,16 @@ Drcrypt garbled circuit:  0.11695456504821777
 0x2b0fea56f3f4bd0305c0e9c1f69f9b1815563e9699f43ad73c2deab62d213412
 ```
 ```
-> python3 sha256_gc.py AAAAAAAAA
+> python sha256_gc.py AAAAAAAAA
 
 Generate garbled circuit:  1.080643653869629
 Drcrypt garbled circuit:  0.10996103286743164
 0xe5f9176ecd90317cf2d4673926c9db65475b0b58e7f468586ddaef280a98cdbd
+```
+```
+> python sha256_gc_noInput.py
+
+Generate garbled circuit:  0.8956959247589111
 ```
 
 ## Contribution
